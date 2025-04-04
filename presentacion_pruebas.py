@@ -55,7 +55,7 @@ st.markdown(f"""
     <img src="data:image/png;base64,{logo_bottom_b64}" class="logo-bottom-right">
 """, unsafe_allow_html=True)
 
-st.title("🚀 Presentación Interactiva: Pruebas de Rendimiento")
+st.title("🚀Pruebas de Rendimiento (Performance Test)")
 
 tabs = st.tabs([
     "Introducción",
@@ -71,72 +71,203 @@ tabs = st.tabs([
 
 with tabs[0]:
     st.header("🔍 ¿Qué son las pruebas de rendimiento?")
-    with st.container():
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            st.image("images/intro.png", use_container_width=True)
-        with col2:
-            st.markdown("""
-**Objetivos de las pruebas:**
 
-- 🔍 Detectar cuellos de botella
-- 🧱 Validar la estabilidad del sistema
-- ⏱️ Asegurar tiempos de respuesta aceptables
-- 📊 Optimizar el uso de recursos
-- 🌐 Mejorar la experiencia de usuario
-            """)
-    with st.container():
+    col1, col2, col3 = st.columns([1, 1.5, 1.5])
+
+    with col1:
+        st.image("images/saturacion_prueba_ren.png", use_container_width=True)
         st.markdown("""
-**¿Por qué son importantes?**
+    **Resumen visual:**  
+    Esta imagen representa un sistema sometido a carga creciente, donde se observan los efectos de la saturación si no se aplican pruebas adecuadas.
+    """)
 
-- 🚨 Evitan incidentes en producción
-- 📈 Aumentan la confianza del cliente
-- 💡 Revelan oportunidades de mejora continua
-        """)
+    with col2:
+        st.markdown("""
+        Las **pruebas de rendimiento** son un conjunto de técnicas que permiten evaluar cómo se comporta un sistema bajo distintas condiciones de carga.
 
+        ### 🎯 ¿Para qué sirven?
+        - 🔎 **Detectar cuellos de botella** antes de que impacten al usuario
+        - 📊 **Medir tiempos de respuesta** frente a diferentes volúmenes de tráfico
+        - 🔋 **Evaluar el uso de recursos** como CPU, memoria y red
+        - 🧱 **Validar la estabilidad** en situaciones de carga prolongada
+
+        ### 🧪 ¿Cuándo aplicarlas?
+        - Antes de un **lanzamiento importante**
+        - Tras una **migración o cambio de arquitectura**
+        - Para soportar campañas con **alto tráfico**
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style='padding:15px; border:2px solid #e0e0e0; border-radius:10px; background:#f9f9f9'>
+        <b>📌 ¿Sabías que...?</b><br><br>
+        Más del <b>70% de los fallos en producción</b> se deben a la falta de pruebas de rendimiento adecuadas. <br><br>
+        <i>Una prueba a tiempo puede ahorrar miles de dólares en incidentes.</i>
+        </div>
+        
+        <div style='margin-top: 10px; padding: 10px; background-color: #f0f2f6; border-left: 5px solid #4CAF50; border-radius: 5px'>
+        <b>✅ Recuerda:</b> <br>
+        Una aplicación rápida no solo es eficiente, también es sinónimo de calidad percibida.
+        </div>
+        
+        """, unsafe_allow_html=True)
+        
+        
 with tabs[1]:
     st.header("🧪 Tipos de Pruebas de Rendimiento")
-    with st.container():
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            st.image("images/tipos.png", use_container_width=True)
-        with col2:
-            st.markdown("""
-- 📦 **Carga:** evaluar comportamiento con usuarios esperados
-- 🔥 **Estrés:** observar fallos al sobrecargar el sistema
-- 🧠 **Volumen:** procesar grandes volúmenes de datos
-- 🕒 **Soak (resistencia):** estabilidad durante horas o días
-- 📈 **Escalabilidad:** medir rendimiento al aumentar infraestructura
-            """)
-    with st.container():
+
+        # Tarjetas tipo resumen
+    col1, col2 = st.columns(2)
+
+    with col1:
         st.markdown("""
-**¿Cuándo aplicar cada una?**
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; background:#fafafa">
+        <h4>📦 Prueba de Carga</h4>
+        - 📊 Evalúa rendimiento bajo condiciones esperadas  
+        - ⏱️ 30 min – 2 hrs  
+        - 📅 Antes de producción
+        </div>
+        """, unsafe_allow_html=True)
 
-- 🧪 Carga: antes de lanzamientos
-- 🧪 Estrés: en ambientes críticos
-- 🧪 Soak: en sistemas 24/7
-- 🧪 Escalabilidad: al migrar o aumentar usuarios
-        """)
+        st.markdown("""
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; background:#fafafa">
+        <h4>🔥 Prueba de Estrés</h4>
+        - ✴️ Empuja el sistema al límite  
+        - ⏱️ 30 min – 1 hr  
+        - 🛠️ Infraestructura crítica
+        </div>
+        """, unsafe_allow_html=True)
 
-with tabs[2]:
-    st.header("⚙️ Herramientas más utilizadas")
-    with st.container():
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            st.image("images/herramientas.png", use_container_width=True)
-        with col2:
+        st.markdown("""
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; background:#fafafa">
+        <h4>🧠 Prueba de Volumen</h4>
+        - 📄 Datos masivos o ETL(Transf.Datos)  
+        - ⏱️ 1 – 4 hrs  
+        - ⚙️ Procesos batch
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Gráfico comparativo
+    st.markdown("#### 📊 Comparativa de Tipos de Prueba (Duración vs Frecuencia)")
+    df = pd.DataFrame({
+        "Tipo": ["Carga", "Estrés", "Volumen", "Resistencia (Soak)", "Escalabilidad"],
+        "Duración (hrs)": [2, 1, 4, 12, 2],
+        "Frecuencia": [5, 3, 2, 1, 2]
+    })
+    fig = px.bar(df.melt(id_vars=["Tipo"], var_name="Métrica", value_name="Valor"),
+                 x="Valor", y="Tipo", color="Métrica", barmode="group",
+                 orientation="h", height=400)
+    st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        st.markdown("""
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; background:#fafafa">
+        <h4>⏲️ Resistencia (Soak)</h4>
+        - ⌛ Carga sostenida  
+        - ⏱️ 6 – 12 hrs  
+        - 🧩 Sistemas 24/7
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; background:#fafafa">
+        <h4>📈 Escalabilidad</h4>
+        - 🔼 Agregar CPU, RAM  
+        - ⏱️ 1 – 2 hrs  
+        - ☁️ Cloud o microservicios
+        </div>
+        """, unsafe_allow_html=True)
+
+
+with tabs[2]:  # ← pestaña Herramientas
+    st.header("🛠️ Herramientas Populares para Pruebas de Rendimiento")
+
+    col1, col2 = st.columns([1, 1.6])
+
+    with col1:
+        st.image("images/comparativa_herra.png", caption="Comparativa visual", use_container_width=True)
+
+    with col2:
+        st.subheader("📚 Explora las herramientas disponibles")
+        st.caption("Haz clic sobre cada bloque para ver más detalles.")
+
+        with st.expander("🧪 Apache JMeter", expanded=True):
             st.markdown("""
-- 🐘 **JMeter:** protocolo HTTP, FTP, JDBC
-- 💻 **k6:** moderno, basado en JavaScript
-- ☁️ **OctoPerf:** UI gráfica amigable y en la nube
-- 🏢 **LoadRunner:** robusto, usado en grandes corporativos
-            """)
-    with st.container():
-        with st.expander("🔍 Ver ejemplo de JMeter"):
-            st.image("https://jmeter.apache.org/images/screenshots/jmeter_graphs.png")
-        with st.expander("🔍 Ver ejemplo de k6"):
-            st.image("https://k6.io/images/illustrations/k6-dashboard.png")
+            **🔎 Descripción:**  
+            JMeter es una herramienta open-source desarrollada por Apache para pruebas de carga y rendimiento.
 
+            **⚙️ Protocolos soportados:**  
+            HTTP, HTTPS, FTP, JDBC, SOAP, REST, JMS, SMTP, TCP y más.
+
+            **💰 Licencia:**  
+            Gratuita, licencia Apache 2.0.
+
+            **✅ Ideal para:**  
+            - Proyectos con bajo presupuesto  
+            - Automatización vía CI/CD  
+            - Usuarios con conocimientos técnicos
+
+            [🌐 Sitio oficial JMeter](https://jmeter.apache.org/)
+            """)
+
+        with st.expander("⚙️ k6 (Grafana)"):
+            st.markdown("""
+            **🔎 Descripción:**  
+            k6 es una moderna herramienta de línea de comandos para pruebas de carga, escrita en Go, con scripting en JavaScript.
+
+            **⚙️ Protocolos soportados:**  
+            HTTP, WebSockets, gRPC (experimental).
+
+            **💰 Licencia:**  
+            Gratuita (MIT) con versión de pago en la nube.
+
+            **✅ Ideal para:**  
+            - Integración en pipelines DevOps  
+            - Pruebas como código  
+            - Equipos modernos
+
+            [🌐 Sitio oficial k6](https://k6.io/)
+            """)
+
+        with st.expander("🌐 OctoPerf"):
+            st.markdown("""
+            **🔎 Descripción:**  
+            OctoPerf es una plataforma SaaS para pruebas de carga con una interfaz amigable basada en JMeter.
+
+            **⚙️ Protocolos soportados:**  
+            HTTP, REST, WebSockets, SQL, SAP, etc.
+
+            **💰 Licencia:**  
+            Comercial, con versión gratuita limitada.
+
+            **✅ Ideal para:**  
+            - Empresas que prefieren no instalar nada  
+            - Visualizaciones e informes potentes  
+            - Trabajo colaborativo y generación rápida
+
+            [🌐 Sitio oficial OctoPerf](https://octoperf.com/)
+            """)
+
+        with st.expander("🏢 LoadRunner"):
+            st.markdown("""
+            **🔎 Descripción:**  
+            LoadRunner es una herramienta empresarial para pruebas de carga con soporte avanzado de protocolos.
+
+            **⚙️ Protocolos soportados:**  
+            HTTP, SAP, Citrix, Oracle, Siebel, etc. (más de 50)
+
+            **💰 Licencia:**  
+            Comercial (de pago), incluye versión trial.
+
+            **✅ Ideal para:**  
+            - Grandes organizaciones  
+            - Integraciones complejas  
+            - Soporte técnico robusto
+
+            [🌐 Sitio oficial LoadRunner](https://www.microfocus.com/en-us/products/loadrunner-professional/overview)
+            """)
+
+    
 with tabs[3]:
     st.header("🧩 Metodología aplicada")
     with st.container():
